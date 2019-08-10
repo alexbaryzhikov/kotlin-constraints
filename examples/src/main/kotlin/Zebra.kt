@@ -25,8 +25,8 @@ brands of American cigarets [sic]. One other thing: in statement 6, right means
 your right.
 */
 
-import core.Problem
-import core.constraints.AllDifferentConstraint
+import com.alexb.constraints.Problem
+import com.alexb.constraints.core.constraints.AllDifferentConstraint
 import kotlin.system.measureTimeMillis
 
 fun zebra(): List<Map<String, String>> {

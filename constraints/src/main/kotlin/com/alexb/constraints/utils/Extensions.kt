@@ -1,6 +1,6 @@
-package utils
+package com.alexb.constraints.utils
 
-import core.Domain
+import com.alexb.constraints.core.Domain
 import kotlin.math.round
 
 @Suppress("UNCHECKED_CAST")

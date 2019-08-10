@@ -1,12 +1,15 @@
-package core
+package com.alexb.constraints
 
-import core.constraints.BiFunctionConstraint
-import core.constraints.FunctionConstraint
-import core.constraints.TriFunctionConstraint
-import core.constraints.UniFunctionConstraint
-import core.solvers.BacktrackingSolver
-import utils.ConstraintEnv
-import utils.copy
+import com.alexb.constraints.core.Constraint
+import com.alexb.constraints.core.Domain
+import com.alexb.constraints.core.Solver
+import com.alexb.constraints.core.constraints.BiFunctionConstraint
+import com.alexb.constraints.core.constraints.FunctionConstraint
+import com.alexb.constraints.core.constraints.TriFunctionConstraint
+import com.alexb.constraints.core.constraints.UniFunctionConstraint
+import com.alexb.constraints.core.solvers.BacktrackingSolver
+import com.alexb.constraints.utils.ConstraintEnv
+import com.alexb.constraints.utils.copy
 
 /**
  * Class used to define a problem and retrieve solutions.

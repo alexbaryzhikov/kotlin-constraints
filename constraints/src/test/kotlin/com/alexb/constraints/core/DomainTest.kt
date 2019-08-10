@@ -1,4 +1,4 @@
-package core
+package com.alexb.constraints.core
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test

@@ -1,8 +1,8 @@
-package core.solvers
+package com.alexb.constraints.core.solvers
 
-import utils.ConstraintEnv
-import core.Domain
-import core.Solver
+import com.alexb.constraints.utils.ConstraintEnv
+import com.alexb.constraints.core.Domain
+import com.alexb.constraints.core.Solver
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap

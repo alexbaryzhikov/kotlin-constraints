@@ -1,6 +1,6 @@
-package core
+package com.alexb.constraints.core
 
-import utils.ConstraintEnv
+import com.alexb.constraints.utils.ConstraintEnv
 
 /**
  * Interface for constraints.

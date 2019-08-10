@@ -1,7 +1,7 @@
-package core
+package com.alexb.constraints
 
 import com.google.common.truth.Truth.assertThat
-import core.constraints.AllDifferentConstraint
+import com.alexb.constraints.core.constraints.AllDifferentConstraint
 import org.junit.Test
 
 class ProblemTest {

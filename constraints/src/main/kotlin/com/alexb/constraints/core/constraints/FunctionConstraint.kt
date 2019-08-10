@@ -1,7 +1,7 @@
-package core.constraints
+package com.alexb.constraints.core.constraints
 
-import core.Constraint
-import core.Domain
+import com.alexb.constraints.core.Constraint
+import com.alexb.constraints.core.Domain
 
 /**
  * Constraint which wraps a function defining the constraint logic.

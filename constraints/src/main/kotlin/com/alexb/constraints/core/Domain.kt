@@ -1,4 +1,4 @@
-package core
+package com.alexb.constraints.core
 
 import java.util.*
 import kotlin.collections.ArrayList

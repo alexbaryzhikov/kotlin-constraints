@@ -1,9 +1,9 @@
-package core.constraints
+package com.alexb.constraints.core.constraints
 
-import core.*
-import core.constraints.MaxSumConstraint.Companion.DOUBLE_PRECISION
-import core.constraints.MaxSumConstraint.Companion.FLOAT_PRECISION
-import utils.*
+import com.alexb.constraints.core.*
+import com.alexb.constraints.core.constraints.MaxSumConstraint.Companion.DOUBLE_PRECISION
+import com.alexb.constraints.core.constraints.MaxSumConstraint.Companion.FLOAT_PRECISION
+import com.alexb.constraints.utils.*
 
 /**
  * Constraint enforcing that values of given variables sum up to
