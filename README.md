@@ -1,2 +1,2 @@
-# kotlin-constraints
-Constraints satisfaction library
+# Constraints
+A constraints satisfaction library for Kotlin.
