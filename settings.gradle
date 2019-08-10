@@ -1,2 +1,2 @@
-rootProject.name = 'Constraints'
+include ':constraints', ':examples'
 
