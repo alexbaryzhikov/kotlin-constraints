@@ -1,0 +1,14 @@
+*.iml
+*.class
+*.o
+local.properties
+workspace.xml
+.DS_Store
+.gradle/
+.idea/
+build/
+captures/
+compiled/
+obj/
+out/
+target/
