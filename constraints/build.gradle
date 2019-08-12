@@ -37,6 +37,7 @@ task dokkaJar(type: Jar) {
     archiveClassifier = 'javadoc'
 }
 
+/*
 // Create the pom configuration:
 def pomConfig = {
     licenses {
@@ -56,6 +57,7 @@ def pomConfig = {
         url 'https://github.com/alexbaryzhikov/kotlin-constraints'
     }
 }
+*/
 
 publishing {
     publications {
@@ -63,9 +65,31 @@ publishing {
             from components.java
             artifact sourcesJar
             artifact dokkaJar
-            groupId 'com.alexb'
-            artifactId 'constraints'
+            groupId project.getGroup()
+            artifactId project.getName()
             version getGitVersionName()
+            pom {
+                name = 'Constraints'
+                description = 'A constraints satisfaction library for Kotlin.'
+                url = 'https://github.com/alexbaryzhikov/kotlin-constraints'
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'alexb'
+                        name = 'Alex Baryzhikov'
+                        email = 'aleksiarts@gmail.com'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/alexbaryzhikov/kotlin-constraints'
+                }
+            }
+/*
             pom.withXml {
                 def root = asNode()
                 root.appendNode('name', 'Constraints')
@@ -73,6 +97,7 @@ publishing {
                 root.appendNode('url', 'https://github.com/alexbaryzhikov/kotlin-constraints')
                 root.children().last() + pomConfig
             }
+*/
         }
     }
 }
