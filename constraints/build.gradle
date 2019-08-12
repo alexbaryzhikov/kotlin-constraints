@@ -19,13 +19,11 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-// custom tasks for creating source/javadoc jars
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
-    archiveClassifier = 'sources'
+    getArchiveClassifier().set('sources')
 }
 
-// Dokka
 dokka {
     outputFormat = 'html'
     outputDirectory = "$buildDir/javadoc"
@@ -33,31 +31,9 @@ dokka {
 }
 
 task dokkaJar(type: Jar) {
-    from dokka
-    archiveClassifier = 'javadoc'
+    from dokka as Object
+    getArchiveClassifier().set('javadoc')
 }
-
-/*
-// Create the pom configuration:
-def pomConfig = {
-    licenses {
-        license {
-            name 'The Apache Software License, Version 2.0'
-            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-        }
-    }
-    developers {
-        developer {
-            id 'alexb'
-            name 'Alex Baryzhikov'
-            email 'aleksiarts@gmail.com'
-        }
-    }
-    scm {
-        url 'https://github.com/alexbaryzhikov/kotlin-constraints'
-    }
-}
-*/
 
 publishing {
     publications {
@@ -89,15 +65,6 @@ publishing {
                     url = 'https://github.com/alexbaryzhikov/kotlin-constraints'
                 }
             }
-/*
-            pom.withXml {
-                def root = asNode()
-                root.appendNode('name', 'Constraints')
-                root.appendNode('description', 'A constraints satisfaction library for Kotlin.')
-                root.appendNode('url', 'https://github.com/alexbaryzhikov/kotlin-constraints')
-                root.children().last() + pomConfig
-            }
-*/
         }
     }
 }
