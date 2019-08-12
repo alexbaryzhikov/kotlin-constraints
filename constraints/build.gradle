@@ -2,6 +2,10 @@ apply plugin: 'kotlin'
 
 apply plugin: 'com.jfrog.bintray'
 
+apply plugin: 'maven-publish'
+
+apply plugin: 'org.jetbrains.dokka'
+
 dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     testImplementation 'junit:junit:4.12'
@@ -15,9 +19,68 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
+// custom tasks for creating source/javadoc jars
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
+}
+
+// Dokka
+dokka {
+    outputFormat = 'html'
+    outputDirectory = "$buildDir/javadoc"
+    reportUndocumented = true
+}
+
+task dokkaJar(type: Jar) {
+    from dokka
+    archiveClassifier = 'javadoc'
+}
+
+// Create the pom configuration:
+def pomConfig = {
+    licenses {
+        license {
+            name 'The Apache Software License, Version 2.0'
+            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+        }
+    }
+    developers {
+        developer {
+            id 'alexb'
+            name 'Alex Baryzhikov'
+            email 'aleksiarts@gmail.com'
+        }
+    }
+    scm {
+        url 'https://github.com/alexbaryzhikov/kotlin-constraints'
+    }
+}
+
+publishing {
+    publications {
+        ConstraintsPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact dokkaJar
+            groupId 'com.alexb'
+            artifactId 'constraints'
+            version getGitVersionName()
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('name', 'Constraints')
+                root.appendNode('description', 'A constraints satisfaction library for Kotlin.')
+                root.appendNode('url', 'https://github.com/alexbaryzhikov/kotlin-constraints')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
 bintray {
     user = System.getenv('BINTRAY_USER')
     key = System.getenv('BINTRAY_APIKEY')
+    publications = ['ConstraintsPublication']
     pkg {
         repo = 'kotlin-constraints'
         name = 'constraints'
@@ -25,10 +88,6 @@ bintray {
         vcsUrl = 'https://github.com/alexbaryzhikov/kotlin-constraints'
         version {
             name = getGitVersionName()
-            desc = 'Constraint Satisfaction for Kotlin ' + getGitVersionName()
-            released = new Date()
-            vcsTag = getGitTag()
-            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
         }
     }
 }
@@ -46,18 +105,8 @@ def getGitTagDescription() {
 def getGitVersionName() {
     def versionArray = getGitTagDescription().split('-')
     if (versionArray.length > 1) {
-        return versionArray[0] + '-' + versionArray[1]
+        return versionArray[0] + '.' + versionArray[1]
     } else {
-        return versionArray[0]
+        return versionArray[0] + '.0'
     }
-}
-
-def getGitTag() {
-    return getGitTagDescription().split('-')[0]
-}
-
-task TestVersionNameAndTag {
-    println getGitTagDescription()
-    println getGitVersionName()
-    println getGitTag()
 }
