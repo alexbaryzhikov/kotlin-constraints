@@ -32,7 +32,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem.reset()
      *     problem.getSolution()
      * ```
-     * Output:
+     * Result:
      * ```
      *     null
      * ```
@@ -51,7 +51,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem.addVariable("a", listOf(1, 2))
      *     problem.getSolution() in listOf(mapOf("a" to 1), mapOf("a" to 2))
      * ```
-     * Output:
+     * Result:
      * ```
      *     true
      * ```
@@ -80,7 +80,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     solutions = problem.getSolutions()
      *     solutions.toList().size
      * ```
-     * Output:
+     * Result:
      * ```
      *     9
      * ```
@@ -117,7 +117,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem.addConstraint({ args -> args[1] == args[0] + 1 }, listOf("a", "b"))
      *     solutions = problem.getSolutions()
      * ```
-     * Output:
+     * Result:
      * ```
      *     [{a=1, b=2}, {a=2, b=3}]
      * ```
@@ -141,7 +141,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem.addConstraint({ a, b, c -> a + b == c }, listOf("a", "b", "c"))
      *     problem.getSolution()
      * ```
-     * Output:
+     * Result:
      * ```
      *     {a=1, b=1, c=2}
      * ```
@@ -165,7 +165,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem.addConstraint({ a, b -> b == a + 1 }, listOf("a", "b"))
      *     solutions = problem.getSolutions()
      * ```
-     * Output:
+     * Result:
      * ```
      *     [{a=1, b=2}, {a=2, b=3}]
      * ```
@@ -189,7 +189,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem.addConstraint({ a -> a == 2 }, "a")
      *     problem.getSolution()
      * ```
-     * Output:
+     * Result:
      * ```
      *     [{a=2, b=1}, {a=2, b=2}]
      * ```
@@ -209,14 +209,14 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem = Problem()
      *     problem.getSolution() == null
      * ```
-     * Output:
+     * Result:
      * ```
      *     true
      *
      *     problem.addVariable("a", listOf(42))
      *     problem.getSolution()
      * ```
-     * Output:
+     * Result:
      * ```
      *     {a=42}
      * ```
@@ -239,14 +239,14 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem = Problem()
      *     problem.getSolutions().isEmpty()
      * ```
-     * Output:
+     * Result:
      * ```
      *     true
      *
      *     problem.addVariable("a", listOf(42))
      *     problem.getSolutions()
      * ```
-     * Output:
+     * Result:
      * ```
      *     [{a=42}]
      * ```
@@ -269,7 +269,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     problem = Problem()
      *     problem.getSolutionSequence().toList().isEmpty()
      * ```
-     * Output:
+     * Result:
      * ```
      *     true
      *
@@ -277,7 +277,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     solutions = problem.getSolutionSequence()
      *     solutions.forEach { println(it) }
      * ```
-     * Output:
+     * Result:
      * ```
      *     {a=42}
      * ```

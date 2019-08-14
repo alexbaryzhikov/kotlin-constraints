@@ -14,7 +14,7 @@ import com.alexb.constraints.core.Domain
  *     problem.addConstraint(func, listOf("a", "b"))
  *     problem.getSolution()
  * ```
- * Output:
+ * Result:
  * ```
  *     {a=1, b=2}
  * ```

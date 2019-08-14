@@ -13,7 +13,7 @@ import com.alexb.constraints.core.Domain
  *     problem.addConstraint({ a, b, c -> a + b == c }, listOf("a", "b", "c"))
  *     problem.getSolution()
  * ```
- * Output:
+ * Result:
  * ```
  *     {a=1, b=1, c=2}
  * ```

@@ -1,32 +1,30 @@
 package com.alexb.constraints.core.constraints
 
-import com.alexb.constraints.core.*
-import com.alexb.constraints.core.constraints.MaxSumConstraint.Companion.DOUBLE_PRECISION
-import com.alexb.constraints.core.constraints.MaxSumConstraint.Companion.FLOAT_PRECISION
+import com.alexb.constraints.core.Constraint
+import com.alexb.constraints.core.Domain
 import com.alexb.constraints.utils.*
 
 /**
- * Constraint enforcing that values of given variables sum up to
- * a given amount. For [Float]s the precision is up to [FLOAT_PRECISION] decimals,
- * for [Double]s -- up to [DOUBLE_PRECISION].
+ * Constraint enforcing that values of given variables sum exactly
+ * to a given amount.
  *
  * Example:
  * ```
  *     val problem = Problem().apply {
  *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint(MaxSumConstraint(3))
+ *         addConstraint(ExactSumConstraint(3))
  *     }
  *     problem.getSolutions()
  * ```
  * Result:
  * ```
- *     [{a=1, b=1}, {a=1, b=2}, {a=2, b=1}]
+ *     [{a=1, b=2}, {a=2, b=1}]
  * ```
  *
- * @param maxSum Value to be considered as the maximum sum.
+ * @param exactSum Value to be considered as the exact sum.
  */
-class MaxSumConstraint<V : Any, D : Number>(
-    private val maxSum: D
+class ExactSumConstraint<V : Any, D : Number>(
+    private val exactSum: D
 ) : Constraint<V, D> {
 
     override fun invoke(
@@ -35,28 +33,30 @@ class MaxSumConstraint<V : Any, D : Number>(
         assignments: HashMap<V, D>,
         forwardcheck: Boolean
     ): Boolean {
-        var sum: D = maxSum.zero() // get the right type of zero
+        var sum: D = exactSum.zero()
+        var missing = false
         for (v in variables) {
-            val value = assignments[v]
-            if (value != null) {
-                sum += value
+            if (v in assignments) {
+                sum += assignments[v]!!
                 @Suppress("UNCHECKED_CAST")
                 sum = when (sum) {
                     is Float -> sum.toDouble().round(FLOAT_PRECISION).toFloat() as D
                     is Double -> sum.round(DOUBLE_PRECISION) as D
                     else -> sum
                 }
+            } else {
+                missing = true
             }
         }
-        if (sum > maxSum) {
+        if (sum > exactSum) {
             return false
         }
-        if (forwardcheck) {
+        if (forwardcheck and missing) {
             for (v in variables) {
                 if (v !in assignments) {
                     val domain = domains[v]!!
                     for (value in ArrayList(domain)) {
-                        if (sum + value > maxSum) {
+                        if (sum + value > exactSum) {
                             domain.hideValue(value)
                         }
                     }
@@ -66,7 +66,7 @@ class MaxSumConstraint<V : Any, D : Number>(
                 }
             }
         }
-        return true
+        return if (missing) sum <= exactSum else sum == exactSum
     }
 
     override fun preprocess(
@@ -79,14 +79,14 @@ class MaxSumConstraint<V : Any, D : Number>(
         for (v in variables) {
             val domain = domains[v]!!
             for (value in ArrayList(domain)) {
-                if (value > maxSum) {
+                if (value > exactSum) {
                     domain.remove(value)
                 }
             }
         }
     }
 
-    override fun toString(): String = "MaxSumConstraint@$maxSum"
+    override fun toString(): String = "ExactSumConstraint@$exactSum"
 
     companion object {
         const val FLOAT_PRECISION = 4

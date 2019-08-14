@@ -13,7 +13,7 @@ import com.alexb.constraints.core.Domain
  *     problem.addConstraint(AllEqualConstraint())
  *     problem.getSolutions()
  * ```
- * Output:
+ * Result:
  * ```
  *     [{a=1, b=1}, {a=2, b=2}]
  * ```

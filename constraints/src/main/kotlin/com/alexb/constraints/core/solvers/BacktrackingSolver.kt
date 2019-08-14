@@ -23,14 +23,14 @@ import kotlin.collections.HashMap
  *     solution = problem.getSolution()
  *     println(solution in result)
  * ```
- * Output:
+ * Result:
  * ```
  *     true
  *
  *     for (solution in problem.getSolutions())
  *         println(solution in result)
  * ```
- * Output:
+ * Result:
  * ```
  *     true
  *     true
@@ -39,7 +39,7 @@ import kotlin.collections.HashMap
  *     for (solution in problem.getSolutionSequence())
  *         println(solution in result)
  * ```
- * Output:
+ * Result:
  * ```
  *     true
  *     true
