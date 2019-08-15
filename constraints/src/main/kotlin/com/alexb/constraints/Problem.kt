@@ -27,9 +27,10 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *
      * Example:
      * ```
-     *     problem = Problem()
-     *     problem.addVariable("a", listOf(1, 2))
-     *     problem.reset()
+     *     val problem = Problem().apply {
+     *         addVariable("a", listOf(1, 2))
+     *         reset()
+     *     }
      *     problem.getSolution()
      * ```
      * Result:
@@ -47,8 +48,9 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
 
      * Example:
      * ```
-     *     problem = Problem()
-     *     problem.addVariable("a", listOf(1, 2))
+     *     val problem = Problem().apply {
+     *         addVariable("a", listOf(1, 2))
+     *     }
      *     problem.getSolution() in listOf(mapOf("a" to 1), mapOf("a" to 2))
      * ```
      * Result:
@@ -75,10 +77,10 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *
      * Example:
      * ```
-     *     problem = Problem()
-     *     problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
-     *     solutions = problem.getSolutions()
-     *     solutions.toList().size
+     *     val problem = Problem().apply {
+     *         addVariables(listOf("a", "b"), listOf(1, 2, 3))
+     *     }
+     *     problem.getSolutions().size
      * ```
      * Result:
      * ```
@@ -112,10 +114,11 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *
      * Example:
      *```
-     *     problem = Problem()
-     *     problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
-     *     problem.addConstraint({ args -> args[1] == args[0] + 1 }, listOf("a", "b"))
-     *     solutions = problem.getSolutions()
+     *     val problem = Problem().apply {
+     *         addVariables(listOf("a", "b"), listOf(1, 2, 3))
+     *         addConstraint({ args -> args[1] == args[0] + 1 }, listOf("a", "b"))
+     *     }
+     *     problem.getSolutions()
      * ```
      * Result:
      * ```
@@ -136,9 +139,10 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *
      * Example:
      * ```
-     *     problem = Problem()
-     *     problem.addVariables(listOf("a", "b", "c"), listOf(1, 2, 3))
-     *     problem.addConstraint({ a, b, c -> a + b == c }, listOf("a", "b", "c"))
+     *     val problem = Problem().apply {
+     *         addVariables(listOf("a", "b", "c"), listOf(1, 2, 3))
+     *         addConstraint({ a, b, c -> a + b == c }, listOf("a", "b", "c"))
+     *     }
      *     problem.getSolution()
      * ```
      * Result:
@@ -160,10 +164,11 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *
      * Example:
      *```
-     *     problem = Problem()
-     *     problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
-     *     problem.addConstraint({ a, b -> b == a + 1 }, listOf("a", "b"))
-     *     solutions = problem.getSolutions()
+     *     val problem = Problem().apply {
+     *         addVariables(listOf("a", "b"), listOf(1, 2, 3))
+     *         addConstraint({ a, b -> b == a + 1 }, listOf("a", "b"))
+     *     }
+     *     problem.getSolutions()
      * ```
      * Result:
      * ```
@@ -184,9 +189,10 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *
      * Example:
      * ```
-     *     problem = Problem()
-     *     problem.addVariables(listOf("a", "b"), listOf(1, 2))
-     *     problem.addConstraint({ a -> a == 2 }, "a")
+     *     val problem = Problem().apply {
+     *         addVariables(listOf("a", "b"), listOf(1, 2))
+     *         addConstraint({ a -> a == 2 }, "a")
+     *     }
      *     problem.getSolution()
      * ```
      * Result:
@@ -206,7 +212,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *
      * Example:
      * ```
-     *     problem = Problem()
+     *     val problem = Problem()
      *     problem.getSolution() == null
      * ```
      * Result:
@@ -236,7 +242,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *
      * Example:
      * ```
-     *     problem = Problem()
+     *     val problem = Problem()
      *     problem.getSolutions().isEmpty()
      * ```
      * Result:
@@ -262,11 +268,11 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
     }
 
     /**
-     * Find and return all solutions to the problem.
+     * Return a sequence of solutions to the problem.
      *
      * Example:
      * ```
-     *     problem = Problem()
+     *     val problem = Problem()
      *     problem.getSolutionSequence().toList().isEmpty()
      * ```
      * Result:
@@ -282,7 +288,7 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *     {a=42}
      * ```
      *
-     * @return All solutions for the problem.
+     * @return A sequence of solutions to the problem.
      */
     fun getSolutionSequence(): Sequence<Map<V, D>> {
         val (domains, constraints, vconstraints) = getArgs()

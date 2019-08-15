@@ -1,7 +1,7 @@
 package com.alexb.constraints.core.constraints
 
 import com.alexb.constraints.Problem
-import com.google.common.truth.Truth
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 class ConstraintsTest {
@@ -13,7 +13,7 @@ class ConstraintsTest {
             addConstraint({ a -> a == 2 }, "a")
         }
         val solutions = problem.getSolutions()
-        Truth.assertThat(solutions).containsExactly(
+        assertThat(solutions).containsExactly(
             mapOf("a" to 2, "b" to 1),
             mapOf("a" to 2, "b" to 2)
         )
@@ -26,7 +26,7 @@ class ConstraintsTest {
             addConstraint({ a, b -> b < a }, listOf("a", "b"))
         }
         val solutions = problem.getSolutions()
-        Truth.assertThat(solutions).containsExactly(
+        assertThat(solutions).containsExactly(
             mapOf("a" to 2, "b" to 1),
             mapOf("a" to 3, "b" to 1),
             mapOf("a" to 3, "b" to 2)
@@ -40,7 +40,7 @@ class ConstraintsTest {
             addConstraint({ a, b, c -> a + b == c }, listOf("a", "b", "c"))
         }
         val solutions = problem.getSolution()
-        Truth.assertThat(solutions).isEqualTo(mapOf("a" to 1, "b" to 1, "c" to 2))
+        assertThat(solutions).isEqualTo(mapOf("a" to 1, "b" to 1, "c" to 2))
     }
 
     @Test
@@ -50,7 +50,7 @@ class ConstraintsTest {
             addConstraint({ args -> args.any { it == 1 } })
         }
         val solutions = problem.getSolutions()
-        Truth.assertThat(solutions).containsExactly(
+        assertThat(solutions).containsExactly(
             mapOf("a" to 1, "b" to 1),
             mapOf("a" to 1, "b" to 2),
             mapOf("a" to 2, "b" to 1)
@@ -63,7 +63,7 @@ class ConstraintsTest {
         problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
         problem.addConstraint(AllDifferentConstraint())
         val solutions = problem.getSolutions()
-        Truth.assertThat(solutions).containsExactly(
+        assertThat(solutions).containsExactly(
             mapOf("a" to 1, "b" to 2),
             mapOf("a" to 1, "b" to 3),
             mapOf("a" to 2, "b" to 1),
@@ -79,7 +79,7 @@ class ConstraintsTest {
         problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
         problem.addConstraint(AllEqualConstraint())
         val solutions = problem.getSolutions()
-        Truth.assertThat(solutions).containsExactly(
+        assertThat(solutions).containsExactly(
             mapOf("a" to 1, "b" to 1),
             mapOf("a" to 2, "b" to 2),
             mapOf("a" to 3, "b" to 3)
@@ -92,7 +92,7 @@ class ConstraintsTest {
         problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
         problem.addConstraint(MaxSumConstraint(3))
         val solutions = problem.getSolutions()
-        Truth.assertThat(solutions).containsExactly(
+        assertThat(solutions).containsExactly(
             mapOf("a" to 1, "b" to 1),
             mapOf("a" to 1, "b" to 2),
             mapOf("a" to 2, "b" to 1)
@@ -105,9 +105,48 @@ class ConstraintsTest {
         problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
         problem.addConstraint(ExactSumConstraint(3))
         val solutions = problem.getSolutions()
-        Truth.assertThat(solutions).containsExactly(
+        assertThat(solutions).containsExactly(
             mapOf("a" to 1, "b" to 2),
             mapOf("a" to 2, "b" to 1)
+        )
+    }
+
+    @Test
+    fun minSumConstraint() {
+        val problem = Problem<String, Double>()
+        problem.addVariables(listOf("a", "b"), listOf(1.1, 2.5, 3.2))
+        problem.addConstraint(MinSumConstraint(5.0))
+        val solutions = problem.getSolutions()
+        assertThat(solutions).containsExactly(
+            mapOf("a" to 2.5, "b" to 2.5),
+            mapOf("a" to 2.5, "b" to 3.2),
+            mapOf("a" to 3.2, "b" to 2.5),
+            mapOf("a" to 3.2, "b" to 3.2)
+        )
+    }
+
+    @Test
+    fun inSetConstraint() {
+        val problem = Problem<String, Int>()
+        problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
+        problem.addConstraint(InSetConstraint(setOf(1)))
+        val solutions = problem.getSolutions()
+        assertThat(solutions).containsExactly(
+            mapOf("a" to 1, "b" to 1)
+        )
+    }
+
+    @Test
+    fun notInSetConstraint() {
+        val problem = Problem<String, Int>()
+        problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
+        problem.addConstraint(NotInSetConstraint(setOf(2)))
+        val solutions = problem.getSolutions()
+        assertThat(solutions).containsExactly(
+            mapOf("a" to 1, "b" to 1),
+            mapOf("a" to 1, "b" to 3),
+            mapOf("a" to 3, "b" to 1),
+            mapOf("a" to 3, "b" to 3)
         )
     }
 }

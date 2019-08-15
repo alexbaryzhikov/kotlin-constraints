@@ -12,13 +12,16 @@ import kotlin.collections.HashMap
  *
  * Examples:
  * ```
- *     result = listOf(mapOf("a" to 1, "b" to 2),
- *                     mapOf("a" to 1, "b" to 3),
- *                     mapOf("a" to 2, "b" to 3))
+ *     val result = listOf(
+ *         mapOf("a" to 1, "b" to 2),
+ *         mapOf("a" to 1, "b" to 3),
+ *         mapOf("a" to 2, "b" to 3)
+ *     )
  *
- *     problem = Problem(BacktrackingSolver())
- *     problem.addVariables(listOf("a", "b"), listOf(1, 2, 3))
- *     problem.addConstraint({ a, b -> b > a }, listOf("a", "b"))
+ *     val problem = Problem(BacktrackingSolver()).apply {
+ *         addVariables(listOf("a", "b"), listOf(1, 2, 3))
+ *         addConstraint({ a, b -> b > a }, listOf("a", "b"))
+ *     }
  *
  *     solution = problem.getSolution()
  *     println(solution in result)

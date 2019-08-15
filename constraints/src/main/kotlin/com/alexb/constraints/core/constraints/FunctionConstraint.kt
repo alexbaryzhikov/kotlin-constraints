@@ -8,10 +8,11 @@ import com.alexb.constraints.core.Domain
  *
  * Example:
  * ```
- *     problem = Problem()
- *     problem.addVariables(listOf("a", "b"), listOf(1, 2))
  *     fun func(args: List<Int>) = args[1] > args[2]
- *     problem.addConstraint(func, listOf("a", "b"))
+ *     val problem = Problem().apply {
+ *         addVariables(listOf("a", "b"), listOf(1, 2))
+ *         addConstraint(func, listOf("a", "b"))
+ *     }
  *     problem.getSolution()
  * ```
  * Result:

@@ -8,9 +8,10 @@ import com.alexb.constraints.core.Domain
  *
  * Example:
  * ```
- *     problem = Problem()
- *     problem.addVariables(listOf("a", "b"), listOf(1, 2))
- *     problem.addConstraint(AllDifferentConstraint())
+ *     val problem = Problem().apply {
+ *         addVariables(listOf("a", "b"), listOf(1, 2))
+ *         addConstraint(AllDifferentConstraint())
+ *     }
  *     problem.getSolutions()
  * ```
  * Result:
