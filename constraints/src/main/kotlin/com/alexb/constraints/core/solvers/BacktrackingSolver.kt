@@ -8,49 +8,10 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 /**
- * Problem solver with backtracking capabilities
- *
- * Examples:
- * ```
- *     val result = listOf(
- *         mapOf("a" to 1, "b" to 2),
- *         mapOf("a" to 1, "b" to 3),
- *         mapOf("a" to 2, "b" to 3)
- *     )
- *
- *     val problem = Problem(BacktrackingSolver()).apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2, 3))
- *         addConstraint({ a, b -> b > a }, listOf("a", "b"))
- *     }
- *
- *     solution = problem.getSolution()
- *     println(solution in result)
- * ```
- * Result:
- * ```
- *     true
- *
- *     for (solution in problem.getSolutions())
- *         println(solution in result)
- * ```
- * Result:
- * ```
- *     true
- *     true
- *     true
- *
- *     for (solution in problem.getSolutionSequence())
- *         println(solution in result)
- * ```
- * Result:
- * ```
- *     true
- *     true
- *     true
- * ```
+ * Problem solver with backtracking capabilities.
  *
  * @param forwardcheck If false forward checking will not be requested
- *        to constraints while looking for solutions
+ *        to constraints while looking for solutions.
  */
 class BacktrackingSolver<V : Any, D : Any>(
     private val forwardcheck: Boolean = true
