@@ -149,4 +149,58 @@ class ConstraintsTest {
             mapOf("a" to 3, "b" to 3)
         )
     }
+
+    @Test
+    fun someInSetConstraintNotExact() {
+        val problem = Problem<String, Int>()
+        problem.addVariables(listOf("a", "b", "c"), listOf(1, 2))
+        problem.addConstraint(SomeInSetConstraint(setOf(2), 2))
+        val solutions = problem.getSolutions()
+        assertThat(solutions).containsExactly(
+            mapOf("a" to 1, "b" to 2, "c" to 2),
+            mapOf("a" to 2, "b" to 1, "c" to 2),
+            mapOf("a" to 2, "b" to 2, "c" to 1),
+            mapOf("a" to 2, "b" to 2, "c" to 2)
+        )
+    }
+
+    @Test
+    fun someInSetConstraintExact() {
+        val problem = Problem<String, Int>()
+        problem.addVariables(listOf("a", "b", "c"), listOf(1, 2))
+        problem.addConstraint(SomeInSetConstraint(setOf(2), 2, true))
+        val solutions = problem.getSolutions()
+        assertThat(solutions).containsExactly(
+            mapOf("a" to 1, "b" to 2, "c" to 2),
+            mapOf("a" to 2, "b" to 1, "c" to 2),
+            mapOf("a" to 2, "b" to 2, "c" to 1)
+        )
+    }
+
+    @Test
+    fun someNotInSetConstraintNotExact() {
+        val problem = Problem<String, Int>()
+        problem.addVariables(listOf("a", "b", "c"), listOf(1, 2))
+        problem.addConstraint(SomeNotInSetConstraint(setOf(2), 2))
+        val solutions = problem.getSolutions()
+        assertThat(solutions).containsExactly(
+            mapOf("a" to 1, "b" to 1, "c" to 1),
+            mapOf("a" to 1, "b" to 1, "c" to 2),
+            mapOf("a" to 1, "b" to 2, "c" to 1),
+            mapOf("a" to 2, "b" to 1, "c" to 1)
+        )
+    }
+
+    @Test
+    fun someNotInSetConstraintExact() {
+        val problem = Problem<String, Int>()
+        problem.addVariables(listOf("a", "b", "c"), listOf(1, 2))
+        problem.addConstraint(SomeNotInSetConstraint(setOf(2), 2, true))
+        val solutions = problem.getSolutions()
+        assertThat(solutions).containsExactly(
+            mapOf("a" to 1, "b" to 1, "c" to 2),
+            mapOf("a" to 1, "b" to 2, "c" to 1),
+            mapOf("a" to 2, "b" to 1, "c" to 1)
+        )
+    }
 }
