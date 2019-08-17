@@ -24,19 +24,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
 
     /**
      * Reset the current problem definition.
-     *
-     * Example:
-     * ```
-     *     val problem = Problem().apply {
-     *         addVariable("a", listOf(1, 2))
-     *         reset()
-     *     }
-     *     problem.getSolution()
-     * ```
-     * Result:
-     * ```
-     *     null
-     * ```
      */
     fun reset() {
         constraints.clear()
@@ -45,18 +32,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
 
     /**
      * Add a variable to the problem
-
-     * Example:
-     * ```
-     *     val problem = Problem().apply {
-     *         addVariable("a", listOf(1, 2))
-     *     }
-     *     problem.getSolution() in listOf(mapOf("a" to 1), mapOf("a" to 2))
-     * ```
-     * Result:
-     * ```
-     *     true
-     * ```
      *
      * @param variable Object representing a problem variable.
      * @param domain Set of items defining the possible values that
@@ -74,18 +49,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
 
     /**
      * Add one or more variables to the problem.
-     *
-     * Example:
-     * ```
-     *     val problem = Problem().apply {
-     *         addVariables(listOf("a", "b"), listOf(1, 2, 3))
-     *     }
-     *     problem.getSolutions().size
-     * ```
-     * Result:
-     * ```
-     *     9
-     * ```
      *
      * @param variables A collection of objects representing problem variables.
      * @param domain Set of items defining the possible values that
@@ -112,19 +75,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
     /**
      * Add a constraint to the problem.
      *
-     * Example:
-     *```
-     *     val problem = Problem().apply {
-     *         addVariables(listOf("a", "b"), listOf(1, 2, 3))
-     *         addConstraint({ args -> args[1] == args[0] + 1 }, listOf("a", "b"))
-     *     }
-     *     problem.getSolutions()
-     * ```
-     * Result:
-     * ```
-     *     [{a=1, b=2}, {a=2, b=3}]
-     * ```
-     *
      * @param constraint Constraint to be included in the problem.
      * @param variables Variables affected by the constraint (default to
      *        all variables). Depending on the constraint type
@@ -136,19 +86,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
 
     /**
      * Add a constraint to the problem.
-     *
-     * Example:
-     * ```
-     *     val problem = Problem().apply {
-     *         addVariables(listOf("a", "b", "c"), listOf(1, 2, 3))
-     *         addConstraint({ a, b, c -> a + b == c }, listOf("a", "b", "c"))
-     *     }
-     *     problem.getSolution()
-     * ```
-     * Result:
-     * ```
-     *     {a=1, b=1, c=2}
-     * ```
      *
      * @param constraint Constraint to be included in the problem.
      * @param variables Variables affected by the constraint (default to
@@ -162,19 +99,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
     /**
      * Add a constraint to the problem.
      *
-     * Example:
-     *```
-     *     val problem = Problem().apply {
-     *         addVariables(listOf("a", "b"), listOf(1, 2, 3))
-     *         addConstraint({ a, b -> b == a + 1 }, listOf("a", "b"))
-     *     }
-     *     problem.getSolutions()
-     * ```
-     * Result:
-     * ```
-     *     [{a=1, b=2}, {a=2, b=3}]
-     * ```
-     *
      * @param constraint Constraint to be included in the problem.
      * @param variables Variables affected by the constraint (default to
      *        all variables). Depending on the constraint type
@@ -187,19 +111,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
     /**
      * Add a constraint to the problem.
      *
-     * Example:
-     * ```
-     *     val problem = Problem().apply {
-     *         addVariables(listOf("a", "b"), listOf(1, 2))
-     *         addConstraint({ a -> a == 2 }, "a")
-     *     }
-     *     problem.getSolution()
-     * ```
-     * Result:
-     * ```
-     *     [{a=2, b=1}, {a=2, b=2}]
-     * ```
-     *
      * @param constraint Constraint to be included in the problem.
      * @param variable Variable affected by the constraint.
      */
@@ -209,23 +120,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
 
     /**
      * Find and return a solution to the problem.
-     *
-     * Example:
-     * ```
-     *     val problem = Problem()
-     *     problem.getSolution() == null
-     * ```
-     * Result:
-     * ```
-     *     true
-     *
-     *     problem.addVariable("a", listOf(42))
-     *     problem.getSolution()
-     * ```
-     * Result:
-     * ```
-     *     {a=42}
-     * ```
      *
      * @return Solution for the problem.
      */
@@ -240,23 +134,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
     /**
      * Find and return all solutions to the problem.
      *
-     * Example:
-     * ```
-     *     val problem = Problem()
-     *     problem.getSolutions().isEmpty()
-     * ```
-     * Result:
-     * ```
-     *     true
-     *
-     *     problem.addVariable("a", listOf(42))
-     *     problem.getSolutions()
-     * ```
-     * Result:
-     * ```
-     *     [{a=42}]
-     * ```
-     *
      * @return All solutions for the problem.
      */
     fun getSolutions(): List<Map<V, D>> {
@@ -269,24 +146,6 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
 
     /**
      * Return a sequence of solutions to the problem.
-     *
-     * Example:
-     * ```
-     *     val problem = Problem()
-     *     problem.getSolutionSequence().toList().isEmpty()
-     * ```
-     * Result:
-     * ```
-     *     true
-     *
-     *     problem.addVariable("a", listOf(42))
-     *     solutions = problem.getSolutionSequence()
-     *     solutions.forEach { println(it) }
-     * ```
-     * Result:
-     * ```
-     *     {a=42}
-     * ```
      *
      * @return A sequence of solutions to the problem.
      */
