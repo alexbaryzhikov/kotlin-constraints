@@ -5,19 +5,6 @@ import com.alexb.constraints.core.Domain
 
 /**
  * Constraint enforcing that values of all given variables are equal.
- *
- * Example:
- * ```
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint(AllEqualConstraint())
- *     }
- *     problem.getSolutions()
- * ```
- * Result:
- * ```
- *     [{a=1, b=1}, {a=2, b=2}]
- * ```
  */
 class AllEqualConstraint<V : Any, D : Any> : Constraint<V, D> {
 

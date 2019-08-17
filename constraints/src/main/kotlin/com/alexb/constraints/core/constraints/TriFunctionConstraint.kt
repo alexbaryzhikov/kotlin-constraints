@@ -6,19 +6,6 @@ import com.alexb.constraints.core.Domain
 /**
  * Constraint which wraps a function defining the constraint logic.
  *
- * Example:
- * ```
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b", "c"), listOf(1, 2, 3))
- *         addConstraint({ a, b, c -> a + b == c }, listOf("a", "b", "c"))
- *     }
- *     problem.getSolution()
- * ```
- * Result:
- * ```
- *     {a=1, b=1, c=2}
- * ```
- *
  * @param func Function wrapped and queried for constraint logic.
  */
 class TriFunctionConstraint<V : Any, D : Any>(

@@ -10,19 +10,6 @@ import com.alexb.constraints.utils.*
  * a given amount. For [Float]s the precision is up to [FLOAT_PRECISION] decimals,
  * for [Double]s -- up to [DOUBLE_PRECISION].
  *
- * Example:
- * ```
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint(MaxSumConstraint(3))
- *     }
- *     problem.getSolutions()
- * ```
- * Result:
- * ```
- *     [{a=1, b=1}, {a=1, b=2}, {a=2, b=1}]
- * ```
- *
  * @param maxSum Value to be considered as the maximum sum.
  */
 class MaxSumConstraint<V : Any, D : Number>(

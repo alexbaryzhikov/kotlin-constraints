@@ -9,20 +9,8 @@ import com.alexb.constraints.utils.zero
 
 /**
  * Constraint enforcing that values of given variables sum at least
- * to a given amount
- *
- * Example:
- * ```
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint(MinSumConstraint(3))
- *     }
- *     problem.getSolutions()
- * ```
- * Result:
- * ```
- *     [{a=1, b=2}, {a=2, b=1}, {a=2, b=2}]
- * ```
+ * to a given amount. For [Float]s the precision is up to [FLOAT_PRECISION] decimals,
+ * for [Double]s -- up to [DOUBLE_PRECISION].
  *
  * @param minSum Value to be considered as the minimum sum.
  */

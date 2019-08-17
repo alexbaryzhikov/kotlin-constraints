@@ -8,19 +8,6 @@ import com.alexb.constraints.utils.*
  * Constraint enforcing that values of given variables sum exactly
  * to a given amount.
  *
- * Example:
- * ```
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint(ExactSumConstraint(3))
- *     }
- *     problem.getSolutions()
- * ```
- * Result:
- * ```
- *     [{a=1, b=2}, {a=2, b=1}]
- * ```
- *
  * @param exactSum Value to be considered as the exact sum.
  */
 class ExactSumConstraint<V : Any, D : Number>(

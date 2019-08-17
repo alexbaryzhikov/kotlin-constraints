@@ -6,20 +6,6 @@ import com.alexb.constraints.core.Domain
 /**
  * Constraint which wraps a function defining the constraint logic.
  *
- * Example:
- * ```
- *     fun func(args: List<Int>) = args[1] > args[2]
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint(func, listOf("a", "b"))
- *     }
- *     problem.getSolution()
- * ```
- * Result:
- * ```
- *     {a=1, b=2}
- * ```
- *
  * @param func Function wrapped and queried for constraint logic.
  */
 class FunctionConstraint<V : Any, D : Any>(

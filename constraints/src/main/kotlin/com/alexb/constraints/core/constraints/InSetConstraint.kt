@@ -6,20 +6,7 @@ import com.alexb.constraints.utils.ConstraintEnv
 
 /**
  * Constraint enforcing that values of given variables are present in
- * the given set
- *
- * Example:
- * ```
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint(InSetConstraint(setOf(1)))
- *     }
- *     problem.getSolutions()
- * ```
- * Result:
- * ```
- *     [{a=1, b=1}]
- * ```
+ * the given set.
  *
  * @param set Set of allowed values.
  */

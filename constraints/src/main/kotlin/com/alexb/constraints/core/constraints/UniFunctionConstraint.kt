@@ -6,19 +6,6 @@ import com.alexb.constraints.core.Domain
 /**
  * Constraint which wraps a function defining the constraint logic.
  *
- * Example:
- * ```
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint({ a -> a == 2 }, "a")
- *     }
- *     problem.getSolution()
- * ```
- * Result:
- * ```
- *     [{a=2, b=1}, {a=2, b=2}]
- * ```
- *
  * @param func Function wrapped and queried for constraint logic.
  */
 class UniFunctionConstraint<V : Any, D : Any>(

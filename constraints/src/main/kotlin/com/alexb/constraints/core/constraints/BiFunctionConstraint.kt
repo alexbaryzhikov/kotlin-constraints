@@ -6,19 +6,6 @@ import com.alexb.constraints.core.Domain
 /**
  * Constraint which wraps a function defining the constraint logic.
  *
- * Example:
- * ```
- *     val problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint({ a, b -> b > a }, listOf("a", "b"))
- *     }
- *     problem.getSolution()
- * ```
- * Result:
- * ```
- *     {a=1, b=2}
- * ```
- *
  * @param func Function wrapped and queried for constraint logic.
  */
 class BiFunctionConstraint<V : Any, D : Any>(

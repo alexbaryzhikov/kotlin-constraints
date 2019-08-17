@@ -5,20 +5,7 @@ import com.alexb.constraints.core.Domain
 
 /**
  * Constraint enforcing that at least some of the values of given
- * variables must be present in a given set
- *
- * Example:
- * ```
- *     problem = Problem().apply {
- *         addVariables(listOf("a", "b"), listOf(1, 2))
- *         addConstraint(SomeInSetConstraint(setOf(1)))
- *     }
- *     problem.getSolutions()
- * ```
- * Result:
- * ```
- *     [{a=1, b=1}, {a=1, b=2}, {a=2, b=1}]
- * ```
+ * variables must be present in a given set.
  *
  * @param set Set of values to be checked.
  * @param n Minimum number of assigned values that should be present
