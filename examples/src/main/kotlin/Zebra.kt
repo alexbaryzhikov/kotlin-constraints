@@ -1,3 +1,7 @@
+import com.alexb.constraints.Problem
+import com.alexb.constraints.core.constraints.AllDifferentConstraint
+import kotlin.system.measureTimeMillis
+
 /*
 The following version of the puzzle appeared in Life International in 1962:
 
@@ -24,10 +28,6 @@ extractions, own different pets, drink different beverages and smoke different
 brands of American cigarets [sic]. One other thing: in statement 6, right means
 your right.
 */
-
-import com.alexb.constraints.Problem
-import com.alexb.constraints.core.constraints.AllDifferentConstraint
-import kotlin.system.measureTimeMillis
 
 fun zebra(): List<Map<String, String>> {
     val problem = Problem<String, String>().apply {
