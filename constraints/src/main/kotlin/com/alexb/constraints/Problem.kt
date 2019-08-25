@@ -38,12 +38,8 @@ class Problem<V : Any, D : Any>(var solver: Solver<V, D> = BacktrackingSolver())
      *        the given variable may assume.
      */
     fun addVariable(variable: V, domain: List<D>) {
-        if (variable in domains) {
-            throw IllegalArgumentException("Duplicate variable: $variable")
-        }
-        if (domain.isEmpty()) {
-            throw IllegalArgumentException("Domain is empty")
-        }
+        require(variable !in domains) { "Duplicate variable: $variable" }
+        require(domain.isNotEmpty()) { "Domain is empty" }
         domains[variable] = Domain(domain.toSet())
     }
 
