@@ -133,7 +133,7 @@ repositories {
 Including dependency:
 ```
 dependencies {
-    implementation 'com.alexb:constraints:0.1.x'
+    implementation 'com.alexb:constraints:1.0.x'
 }
 ```
 
