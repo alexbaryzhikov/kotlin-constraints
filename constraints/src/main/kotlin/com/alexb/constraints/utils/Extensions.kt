@@ -107,7 +107,7 @@ internal operator fun Number.compareTo(other: Number): Int = when (this) {
     else -> throw IllegalArgumentException("Unsupported number type")
 }
 
-internal fun <V : Any,D : Any> HashMap<V, Domain<D>>.copy(): HashMap<V, Domain<D>> {
+internal fun <V : Any, D : Any> HashMap<V, Domain<D>>.copy(): HashMap<V, Domain<D>> {
     val result = HashMap<V, Domain<D>>()
     for (entry in entries) {
         result[entry.key] = Domain(entry.value.toSet())

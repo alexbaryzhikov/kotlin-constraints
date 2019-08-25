@@ -43,4 +43,20 @@ class SolversTest {
         assertThat(problem.getSolutions()).containsExactlyElementsIn(result)
         problem.getSolutionSequence()
     }
+
+    @Test
+    fun minConflictsSolver() {
+        val result = listOf(
+            mapOf("a" to 1, "b" to 2),
+            mapOf("a" to 1, "b" to 3),
+            mapOf("a" to 2, "b" to 3)
+        )
+
+        val problem = Problem<String, Int>(MinConflictsSolver()).apply {
+            addVariables(listOf("a", "b"), listOf(1, 2, 3))
+            addConstraint({ a, b -> b > a })
+        }
+
+        assertThat(problem.getSolution()).isIn(result)
+    }
 }
